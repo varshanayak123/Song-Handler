@@ -1,8 +1,8 @@
 const Navbar = ({ currentView = 'home', setCurrentView }) => {
   return (
-   <div className='fixed top-0 left-0 right-0 z-50 flex py-3.5 px-10 justify-between items-center backdrop-blur-md bg-[#211103]/85 border-b border-[#7B0D1E]/40 text-[#F8E5EE] shadow-md'>
+   <div className='fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center border-b border-[#7B0D1E]/40 bg-[#211103]/85 px-6 py-3.5 text-[#F8E5EE] shadow-md backdrop-blur-md sm:px-10'>
       <div 
-        className='flex items-center gap-3 cursor-pointer'
+        className='flex items-center gap-3 cursor-pointer justify-self-start'
         onClick={() => setCurrentView && setCurrentView('home')}
       >
         <svg
@@ -17,7 +17,7 @@ const Navbar = ({ currentView = 'home', setCurrentView }) => {
         </svg>
         <span className='font-serif font-bold text-[#F8E5EE] text-xl tracking-[0.18em]'>MAE</span>
       </div>
-        <div className='flex gap-8 items-center'>
+        <nav className='flex items-center justify-self-center gap-8' aria-label="Main navigation">
             <button 
               onClick={() => {
                 if (setCurrentView) setCurrentView('home')
@@ -51,6 +51,15 @@ const Navbar = ({ currentView = 'home', setCurrentView }) => {
             >
               Favorite
             </button>
+        </nav>
+
+        <div className='flex items-center justify-self-end gap-3'>
+          <button
+            type="button"
+            className='rounded-full bg-[#9F2042] px-5 py-2 text-sm font-bold text-[#F8E5EE] shadow-sm transition-colors duration-200 hover:bg-[#7B0D1E] cursor-pointer'
+          >
+            Sign In
+          </button>
           <button
             type="button"
             onClick={() => {
