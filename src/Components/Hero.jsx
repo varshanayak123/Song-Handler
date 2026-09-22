@@ -5,11 +5,12 @@ const Hero = ({ setSearch }) => {
   const [input, setInput] = useState('')
   const [suggestions, setSuggestions] = useState([])
 
-  const handleSearch = (value = input) => {
-  setInput(value)
-  setSearch(value)
-  setSuggestions([])
-}
+  const handleSearch = (value) => {
+    const query = typeof value === 'string' ? value : input
+    setInput(query)
+    setSearch(query)
+    setSuggestions([])
+  }
   useEffect(() => {
 
     const getSuggestions = async () => {
@@ -35,11 +36,11 @@ const Hero = ({ setSearch }) => {
   return (
     <div className='pt-24 py-20 px-5 text-center'>
 
-      <h1 className='text-5xl font-bold text-white'>
+      <h1 className='text-5xl font-extrabold text-[#F8E5EE] tracking-tight'>
         Find Your Favorite Music
       </h1>
 
-      <p className='mt-4 text-gray-600 text-lg'>
+      <p className='mt-4 text-[#F8E5EE]/75 text-lg font-medium'>
         Search for your favorite artists and discover their albums
       </p>
 
@@ -48,7 +49,7 @@ const Hero = ({ setSearch }) => {
         <div className='relative w-full max-w-xl'>
 
           {/* Search Bar */}
-          <div className='flex w-full bg-white rounded-full shadow-md overflow-hidden border border-gray-200'>
+          <div className='flex w-full bg-[#3D1308] rounded-full shadow-lg overflow-hidden border border-[#7B0D1E] focus-within:border-[#9F2042] focus-within:ring-2 focus-within:ring-[#9F2042]/30 transition-all duration-200'>
 
             <input
               type='text'
@@ -60,12 +61,12 @@ const Hero = ({ setSearch }) => {
                   handleSearch()
                 }
               }}
-              className='flex-1 px-6 py-4 outline-none text-gray-700'
+              className='flex-1 px-6 py-4 outline-none text-[#F8E5EE] placeholder:text-[#F8E5EE]/40 bg-transparent'
             />
 
             <button
-              onClick={handleSearch}
-              className='px-7 py-4 bg-red-800 text-white font-semibold border-none hover:bg-red-700 transition'
+              onClick={() => handleSearch(input)}
+              className='px-7 py-4 bg-[#9F2042] text-[#F8E5EE] font-bold border-none hover:bg-[#7B0D1E] transition-colors duration-200 cursor-pointer shadow-sm'
             >
               Search
             </button>
@@ -74,14 +75,13 @@ const Hero = ({ setSearch }) => {
 
           {/* Suggestions */}
           {suggestions.length > 0 && (
-            <div className='absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-md text-left overflow-hidden z-50'>
+            <div className='absolute top-full left-0 right-0 mt-2 bg-[#3D1308] rounded-2xl shadow-xl text-left overflow-hidden z-50 border border-[#7B0D1E]'>
 
               {suggestions.map((artist) => (
                 <div
                   key={artist.artistId}
                   onClick={() => handleSearch(artist.artistName)}
-                  
-                  className='px-5 py-3 cursor-pointer hover:bg-gray-100 text-gray-700'
+                  className='px-5 py-3.5 cursor-pointer hover:bg-[#7B0D1E] text-[#F8E5EE] font-medium transition-colors duration-150 border-b border-[#7B0D1E]/40 last:border-b-0'
                 >
                   {artist.artistName}
                 </div>

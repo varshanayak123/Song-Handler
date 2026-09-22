@@ -2,14 +2,22 @@ import React, { useState, useEffect } from 'react'
 import Navbar from './Components/Navbar'
 import Hero from './Components/Hero'
 import AlbumGrid from './Components/AlbumGrid'
+import Favorites from './Components/Favorites'
+import About from './Components/About'
 import { searchAlbums } from './Services/itunesApi'
 
 const App = () => {
 
+const [currentView, setCurrentView] = useState('home')
 const [search, setSearch] = useState('')
 const [apiAlbums, setApiAlbums] = useState([])
 const [trendingAlbums, setTrendingAlbums] = useState([])
 const [specialAlbums, setSpecialAlbums] = useState([])
+
+const [favorites, setFavorites] = useState(() => {
+  const saved = localStorage.getItem('favorites')
+  return saved ? JSON.parse(saved) : []
+})
 
 useEffect(() => {
 
@@ -64,6 +72,8 @@ useEffect(() => {
 }, [])
 
   const handleSearch = async (artist) => {
+    if (typeof artist !== 'string') return
+
     setSearch(artist)
 
     if (artist.trim() === '') {
@@ -71,27 +81,75 @@ useEffect(() => {
       return
     }
 
-    const results = await searchAlbums(artist)
-
-    setApiAlbums(results)
+    try {
+      const results = await searchAlbums(artist)
+      setApiAlbums(results || [])
+    } catch (error) {
+      console.error('Error fetching albums:', error)
+      setApiAlbums([])
+    }
   }
 
+  const toggleFavorite = (album) => {
+  setFavorites((prev) => {
+
+    const exists = prev.some(
+      (fav) => fav.id === album.id
+    )
+
+    if (exists) {
+      return prev.filter(
+        (fav) => fav.id !== album.id
+      )
+    }
+
+    return [...prev, album]
+  })
+}
+
+useEffect(() => {
+  localStorage.setItem('favorites', JSON.stringify(favorites))
+}, [favorites])
+
   return (
-    <div
-      className="min-h-screen bg-cover bg-center bg-fixed"
-      style={{ backgroundImage: "url('https://i.pinimg.com/736x/f8/e8/17/f8e817b3a5b4c282010d85555a37f554.jpg')" }}
-    >
+    <div className="min-h-screen bg-gradient-to-b from-[#211103] via-[#211103] to-[#3D1308] text-[#F8E5EE]">
 
-      <Navbar />
+      <Navbar currentView={currentView} setCurrentView={setCurrentView} />
 
-      <Hero setSearch={handleSearch} />
+      {currentView === 'home' && (
+        <>
+          <Hero setSearch={handleSearch} />
 
-      <AlbumGrid
-        search={search}
-        apiAlbums={apiAlbums}
-        specialAlbums={specialAlbums}
-        trendingAlbums={trendingAlbums}
-      />
+          <AlbumGrid 
+            search={search} 
+            apiAlbums={apiAlbums} 
+            specialAlbums={specialAlbums} 
+            trendingAlbums={trendingAlbums}
+            favorites={favorites}
+            toggleFavorite={toggleFavorite}
+          />
+        </>
+      )}
+
+      {currentView === 'favorites' && (
+        <Favorites 
+          favorites={favorites}
+          toggleFavorite={toggleFavorite}
+          onExploreMusic={() => {
+            setCurrentView('home')
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        />
+      )}
+
+      {currentView === 'about' && (
+        <About 
+          onExploreMusic={() => {
+            setCurrentView('home')
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+        />
+      )}
 
     </div>
   )

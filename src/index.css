@@ -1,4 +1,15 @@
 @import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+  background-color: #211103;
+}
+
 ::-webkit-scrollbar {
   display: none;
+}
+
+::selection {
+  background-color: #9F2042;
+  color: #F8E5EE;
 }
