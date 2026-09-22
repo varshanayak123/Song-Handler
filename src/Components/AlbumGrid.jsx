@@ -79,12 +79,18 @@ const AlbumGrid = ({
 
       {/* Today's Special */}
 
-      <div className='mb-6'>
-        <h2 className='text-2xl font-extrabold text-[#F8E5EE] sm:text-3xl'>
-          Today's Special
-        </h2>
+      <div className='mb-6 flex items-center justify-between gap-4'>
+        <div>
+          <h2 className='text-2xl font-extrabold text-[#F8E5EE] sm:text-3xl'>
+            Today's Special
+          </h2>
 
-        <div className='mt-2 h-1 w-12 rounded-full bg-[#9F2042]'></div>
+          <div className='mt-2 h-1 w-12 rounded-full bg-[#9F2042]'></div>
+        </div>
+
+        <button type='button' className='shrink-0 border-0 bg-transparent p-0 text-xs font-semibold text-[#F8E5EE]/70 transition-colors duration-200 cursor-pointer hover:text-[#F8E5EE] sm:text-sm'>
+          See all
+        </button>
       </div>
 
       <div className='flex gap-4 overflow-x-auto px-1 pb-3 pt-2 sm:gap-6 sm:px-3 lg:gap-10 lg:p-5'>
@@ -105,12 +111,18 @@ const AlbumGrid = ({
 
       {/* Trending */}
 
-      <div className='mb-6 mt-10 sm:mt-14'>
-        <h2 className='text-2xl font-extrabold text-[#F8E5EE] sm:text-3xl'>
-          Trending
-        </h2>
+      <div className='mb-6 mt-10 flex items-center justify-between gap-4 sm:mt-14'>
+        <div>
+          <h2 className='text-2xl font-extrabold text-[#F8E5EE] sm:text-3xl'>
+            Trending
+          </h2>
 
-        <div className='mt-2 h-1 w-12 rounded-full bg-[#9F2042]'></div>
+          <div className='mt-2 h-1 w-12 rounded-full bg-[#9F2042]'></div>
+        </div>
+
+        <button type='button' className='shrink-0 border-0 bg-transparent p-0 text-xs font-semibold text-[#F8E5EE]/70 transition-colors duration-200 cursor-pointer hover:text-[#F8E5EE] sm:text-sm'>
+          See all
+        </button>
       </div>
 
       <div className='flex gap-4 overflow-x-auto px-1 pb-3 pt-2 sm:gap-6 sm:px-3 lg:gap-10 lg:p-5'>
