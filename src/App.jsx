@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import Navbar from './Components/Navbar'
 import Hero from './Components/Hero'
 import AlbumGrid from './Components/AlbumGrid'
 import Favorites from './Components/Favorites'
 import About from './Components/About'
+import Profile from './Components/Profile'
 import { searchAlbums } from './Services/itunesApi'
 
 const App = () => {
@@ -149,6 +150,10 @@ useEffect(() => {
             window.scrollTo({ top: 0, behavior: 'smooth' })
           }}
         />
+      )}
+
+      {currentView === 'profile' && (
+        <Profile favorites={favorites} />
       )}
 
     </div>
