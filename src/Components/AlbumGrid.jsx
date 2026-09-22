@@ -40,13 +40,13 @@ const AlbumGrid = ({
   const isSearching = typeof search === 'string' && search.trim() !== ''
 
   return (
-    <section className='px-8 py-12'>
+    <section className='px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12'>
 
       {isSearching && (
-        <div className='mb-12'>
+        <div className='mb-10 sm:mb-12'>
 
           <div className='mb-6'>
-            <h2 className='text-3xl font-extrabold text-[#F8E5EE]'>
+            <h2 className='text-2xl font-extrabold text-[#F8E5EE] sm:text-3xl'>
               Search Results
             </h2>
 
@@ -54,11 +54,11 @@ const AlbumGrid = ({
           </div>
 
           {formattedApiAlbums.length > 0 ? (
-            <div className='flex flex-wrap gap-10 p-5'>
+            <div className='grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 md:grid-cols-4 lg:grid-cols-5 lg:gap-8 xl:grid-cols-6'>
               {formattedApiAlbums.map((album, index) => (
                 <div
                   key={`${album.name}-${index}`}
-                   className='w-[200px] min-w-[200px]'
+                   className='min-w-0'
                 >
                   <AlbumCard
                     album={album}
@@ -69,7 +69,7 @@ const AlbumGrid = ({
               ))}
             </div>
           ) : (
-            <p className='text-[#F8E5EE]/70 px-5 text-lg'>
+            <p className='px-1 text-lg text-[#F8E5EE]/70 sm:px-5'>
               No albums found.
             </p>
           )}
@@ -80,17 +80,17 @@ const AlbumGrid = ({
       {/* Today's Special */}
 
       <div className='mb-6'>
-        <h2 className='text-3xl font-extrabold text-[#F8E5EE]'>
+        <h2 className='text-2xl font-extrabold text-[#F8E5EE] sm:text-3xl'>
           Today's Special
         </h2>
 
         <div className='mt-2 h-1 w-12 rounded-full bg-[#9F2042]'></div>
       </div>
 
-      <div className='flex gap-10 p-5 overflow-x-auto'>
+      <div className='flex gap-4 overflow-x-auto px-1 pb-3 pt-2 sm:gap-6 sm:px-3 lg:gap-10 lg:p-5'>
 
         {formattedSpecialAlbums.map((album, index) => (
-          <div key={`${album.name}-${index}`} className='min-w-[200px]'>
+          <div key={`${album.name}-${index}`} className='min-w-[160px] sm:min-w-[180px] lg:min-w-[200px]'>
 
             <AlbumCard
               album={album}
@@ -105,18 +105,18 @@ const AlbumGrid = ({
 
       {/* Trending */}
 
-      <div className='mt-14 mb-6'>
-        <h2 className='text-3xl font-extrabold text-[#F8E5EE]'>
+      <div className='mb-6 mt-10 sm:mt-14'>
+        <h2 className='text-2xl font-extrabold text-[#F8E5EE] sm:text-3xl'>
           Trending
         </h2>
 
         <div className='mt-2 h-1 w-12 rounded-full bg-[#9F2042]'></div>
       </div>
 
-      <div className='flex gap-10 p-5 overflow-x-auto'>
+      <div className='flex gap-4 overflow-x-auto px-1 pb-3 pt-2 sm:gap-6 sm:px-3 lg:gap-10 lg:p-5'>
 
         {formattedTrendingAlbums.map((album, index) => (
-          <div key={`${album.name}-${index}`} className='min-w-[200px]'>
+          <div key={`${album.name}-${index}`} className='min-w-[160px] sm:min-w-[180px] lg:min-w-[200px]'>
 
             <AlbumCard
               album={album}

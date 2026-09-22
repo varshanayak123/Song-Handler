@@ -7,14 +7,14 @@ const AlbumCard = ({ album, favorites, toggleFavorite }) => {
   )
 
   return (
-    <div className='bg-[#3D1308] border border-[#7B0D1E]/40 hover:border-[#9F2042] rounded-xl overflow-hidden shadow-lg h-[340px] hover:scale-105 transition-all duration-300'>
+    <div className='h-[300px] overflow-hidden rounded-xl border border-[#7B0D1E]/40 bg-[#3D1308] shadow-lg transition-all duration-300 hover:border-[#9F2042] sm:h-[320px] lg:h-[340px] lg:hover:scale-105'>
 
       <div className='relative'>
 
         <img
           src={album.image}
           alt='Album'
-          className='w-full h-45 object-cover'
+          className='h-32 w-full object-cover sm:h-40 lg:h-45'
         />
 
         <button
@@ -40,23 +40,23 @@ const AlbumCard = ({ album, favorites, toggleFavorite }) => {
 
       </div>
 
-      <div className='p-4'>
+      <div className='p-3 sm:p-4'>
 
-        <h2 className='text-[#F8E5EE] text-lg font-bold truncate'>
+        <h2 className='truncate text-sm font-bold text-[#F8E5EE] sm:text-lg'>
           {album.name}
         </h2>
 
-        <p className='text-[#F8E5EE]/75 text-sm mt-1 truncate font-medium'>
+        <p className='mt-1 truncate text-xs font-medium text-[#F8E5EE]/75 sm:text-sm'>
           {album.artist}
         </p>
 
-        <p className='text-[#F8E5EE]/60 text-sm mt-1'>
+        <p className='mt-1 text-xs text-[#F8E5EE]/60 sm:text-sm'>
           {album.date}
         </p>
 
         <button
           onClick={() => window.open(album.albumUrl, '_blank')}
-          className='mt-4 w-full bg-[#9F2042] hover:bg-[#7B0D1E] text-[#F8E5EE] font-bold py-2 rounded-lg transition-colors duration-200 shadow-sm cursor-pointer'
+          className='mt-3 w-full rounded-lg bg-[#9F2042] py-2 text-xs font-bold text-[#F8E5EE] shadow-sm transition-colors duration-200 cursor-pointer hover:bg-[#7B0D1E] sm:mt-4 sm:text-sm'
         >
           🎧 Open Album
         </button>

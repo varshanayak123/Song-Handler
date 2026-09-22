@@ -170,7 +170,7 @@ const App = () => {
 
   return (
 
-    <div className="app-shell min-h-screen text-[#F8E5EE]">
+    <div className="app-shell min-h-screen overflow-x-clip text-[#F8E5EE]">
 
       <Navbar
         currentView={currentView}

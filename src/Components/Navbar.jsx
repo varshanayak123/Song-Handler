@@ -1,9 +1,16 @@
+import { useState } from 'react'
+
 const Navbar = ({ currentView = 'home', setCurrentView }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
   return (
-   <div className='fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center border-b border-[#7B0D1E]/40 bg-[#211103]/85 px-6 py-3.5 text-[#F8E5EE] shadow-md backdrop-blur-md sm:px-10'>
+   <div className='fixed top-0 left-0 right-0 z-50 flex items-center justify-between border-b border-[#7B0D1E]/40 bg-[#211103]/85 px-4 py-3 text-[#F8E5EE] shadow-md backdrop-blur-md sm:grid sm:grid-cols-[1fr_auto_1fr] sm:px-6 lg:px-10'>
       <div 
         className='flex items-center gap-3 cursor-pointer justify-self-start'
-        onClick={() => setCurrentView && setCurrentView('home')}
+        onClick={() => {
+          if (setCurrentView) setCurrentView('home')
+          setIsMobileMenuOpen(false)
+        }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +24,7 @@ const Navbar = ({ currentView = 'home', setCurrentView }) => {
         </svg>
         <span className='font-serif font-bold text-[#F8E5EE] text-xl tracking-[0.18em]'>MAE</span>
       </div>
-        <nav className='flex items-center justify-self-center gap-8' aria-label="Main navigation">
+        <nav className='hidden items-center justify-self-center gap-8 sm:flex' aria-label="Main navigation">
             <button 
               onClick={() => {
                 if (setCurrentView) setCurrentView('home')
@@ -53,10 +60,10 @@ const Navbar = ({ currentView = 'home', setCurrentView }) => {
             </button>
         </nav>
 
-        <div className='flex items-center justify-self-end gap-3'>
+        <div className='flex items-center justify-self-end gap-2 sm:gap-3'>
           <button
             type="button"
-            className='rounded-full bg-[#9F2042] px-5 py-2 text-sm font-bold text-[#F8E5EE] shadow-sm transition-colors duration-200 hover:bg-[#7B0D1E] cursor-pointer'
+            className='hidden rounded-full bg-[#9F2042] px-5 py-2 text-sm font-bold text-[#F8E5EE] shadow-sm transition-colors duration-200 hover:bg-[#7B0D1E] cursor-pointer sm:inline-flex'
           >
             Sign In
           </button>
@@ -64,6 +71,7 @@ const Navbar = ({ currentView = 'home', setCurrentView }) => {
             type="button"
             onClick={() => {
               if (setCurrentView) setCurrentView('profile')
+              setIsMobileMenuOpen(false)
               window.scrollTo({ top: 0, behavior: 'smooth' })
             }}
             className={`h-9 w-9 rounded-full bg-[#3D1308] border shadow-inner flex items-center justify-center transition-colors duration-200 cursor-pointer hover:border-[#9F2042] focus:outline-none focus:ring-2 focus:ring-[#9F2042]/70 ${
@@ -86,7 +94,31 @@ const Navbar = ({ currentView = 'home', setCurrentView }) => {
             </svg>
           </button>
 
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen((isOpen) => !isOpen)}
+            className='flex h-9 w-9 items-center justify-center rounded-full border border-[#7B0D1E]/80 bg-[#3D1308] text-[#F8E5EE] transition-colors duration-200 hover:border-[#9F2042] cursor-pointer sm:hidden'
+            aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-controls="mobile-navigation"
+            aria-expanded={isMobileMenuOpen}
+          >
+            {isMobileMenuOpen ? (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-current" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-current" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+            )}
+          </button>
+
         </div>
+
+        {isMobileMenuOpen && (
+          <nav id="mobile-navigation" className='absolute left-4 right-4 top-full mt-2 rounded-2xl border border-[#7B0D1E]/70 bg-[#211103]/95 p-3 shadow-xl backdrop-blur-md sm:hidden' aria-label="Mobile navigation">
+            <button onClick={() => { if (setCurrentView) setCurrentView('home'); setIsMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }) }} className={`block w-full rounded-xl px-4 py-3 text-left font-bold transition-colors cursor-pointer ${currentView === 'home' ? 'bg-[#3D1308] text-[#9F2042]' : 'text-[#F8E5EE] hover:bg-[#3D1308] hover:text-[#9F2042]'}`}>Home</button>
+            <button onClick={() => { if (setCurrentView) setCurrentView('about'); setIsMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }) }} className={`block w-full rounded-xl px-4 py-3 text-left font-bold transition-colors cursor-pointer ${currentView === 'about' ? 'bg-[#3D1308] text-[#9F2042]' : 'text-[#F8E5EE] hover:bg-[#3D1308] hover:text-[#9F2042]'}`}>About</button>
+            <button onClick={() => { if (setCurrentView) setCurrentView('favorites'); setIsMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }) }} className={`block w-full rounded-xl px-4 py-3 text-left font-bold transition-colors cursor-pointer ${currentView === 'favorites' ? 'bg-[#3D1308] text-[#9F2042]' : 'text-[#F8E5EE] hover:bg-[#3D1308] hover:text-[#9F2042]'}`}>Favorite</button>
+            <button type="button" onClick={() => setIsMobileMenuOpen(false)} className='mt-2 w-full rounded-full bg-[#9F2042] px-4 py-3 font-bold text-[#F8E5EE] transition-colors hover:bg-[#7B0D1E] cursor-pointer'>Sign In</button>
+          </nav>
+        )}
     </div>
   )
 }

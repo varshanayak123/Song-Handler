@@ -3,11 +3,11 @@ import AlbumCard from './AlbumCard'
 
 const Favorites = ({ favorites = [], toggleFavorite, onExploreMusic }) => {
   return (
-    <div className='pt-28 px-8 py-12 min-h-[85vh]'>
+    <div className='min-h-[85vh] px-4 py-8 pt-24 sm:px-6 sm:py-10 sm:pt-28 lg:px-8 lg:py-12'>
 
       <div className='mb-8'>
 
-        <h1 className='text-4xl font-extrabold text-[#F8E5EE] flex items-center gap-3'>
+        <h1 className='flex items-center gap-2 text-3xl font-extrabold text-[#F8E5EE] sm:gap-3 sm:text-4xl'>
 
           <span className='p-2 rounded-full bg-[#3D1308] border border-[#7B0D1E] shadow-sm flex items-center justify-center'>
 
@@ -38,13 +38,13 @@ const Favorites = ({ favorites = [], toggleFavorite, onExploreMusic }) => {
         <>
 
           {/* Favorite Albums */}
-          <div className='flex flex-wrap gap-10 p-5'>
+          <div className='grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-5 lg:gap-10'>
 
             {favorites.map((album, index) => (
 
               <div
                 key={`${album.id || album.name}-${index}`}
-                className='w-[200px] min-w-[200px]'
+                className='min-w-0'
               >
 
                 <AlbumCard
@@ -60,11 +60,11 @@ const Favorites = ({ favorites = [], toggleFavorite, onExploreMusic }) => {
           </div>
 
           {/* Add More Songs */}
-          <div className='mt-12 flex justify-center'>
+          <div className='mt-10 flex justify-center sm:mt-12'>
 
             <button
               onClick={onExploreMusic}
-              className='px-8 py-3.5 bg-[#9F2042] text-[#F8E5EE] font-bold rounded-full hover:bg-[#7B0D1E] transition-colors duration-200 shadow-md cursor-pointer hover:shadow-lg'
+              className='w-full rounded-full bg-[#9F2042] px-8 py-3.5 font-bold text-[#F8E5EE] shadow-md transition-colors duration-200 cursor-pointer hover:bg-[#7B0D1E] hover:shadow-lg sm:w-auto'
             >
               Add More Songs
             </button>
@@ -74,7 +74,7 @@ const Favorites = ({ favorites = [], toggleFavorite, onExploreMusic }) => {
         </>
       ) : (
 
-        <div className='flex flex-col items-center justify-center py-16 px-6 text-center bg-[#3D1308] rounded-3xl border border-[#7B0D1E]/60 max-w-md mx-auto shadow-lg'>
+        <div className='mx-auto flex max-w-md flex-col items-center justify-center rounded-3xl border border-[#7B0D1E]/60 bg-[#3D1308] px-5 py-12 text-center shadow-lg sm:px-6 sm:py-16'>
 
           {/* Music Icon */}
           <div className='w-16 h-16 rounded-full bg-[#211103] flex items-center justify-center mb-4 border border-[#7B0D1E] shadow-inner'>

@@ -40,30 +40,30 @@ const Profile = ({ favorites = [] }) => {
   const inputClassName = 'w-full rounded-xl border border-[#7B0D1E]/70 bg-[#211103] px-4 py-3 text-[#F8E5EE] outline-none transition-colors placeholder:text-[#F8E5EE]/35 focus:border-[#9F2042] focus:ring-2 focus:ring-[#9F2042]/25'
 
   return (
-    <main className="min-h-[85vh] px-6 py-12 pt-28 sm:px-8">
+    <main className="min-h-[85vh] px-4 py-8 pt-24 sm:px-6 sm:py-10 sm:pt-28 lg:px-8 lg:py-12">
       <section className="mx-auto max-w-2xl overflow-hidden rounded-3xl border border-[#7B0D1E]/60 bg-[#3D1308] shadow-lg">
-        <div className="border-b border-[#7B0D1E]/50 bg-[#211103]/45 px-6 py-7 sm:px-10">
+        <div className="border-b border-[#7B0D1E]/50 bg-[#211103]/45 px-5 py-6 sm:px-10 sm:py-7">
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#9F2042]">Your profile</p>
           <h1 className="mt-2 text-3xl font-extrabold text-[#F8E5EE] sm:text-4xl">Music, saved your way.</h1>
         </div>
 
-        <div className="px-6 py-8 sm:px-10 sm:py-10">
+        <div className="px-5 py-7 sm:px-10 sm:py-10">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-5">
+            <div className="flex min-w-0 items-center gap-4 sm:gap-5">
               <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full border border-[#9F2042] bg-[#211103] shadow-inner">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-10 w-10 fill-none stroke-[#F8E5EE]" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <circle cx="12" cy="8" r="3.25" />
                   <path d="M5.5 20c.65-3.3 3.1-5.25 6.5-5.25s5.85 1.95 6.5 5.25" />
                 </svg>
               </div>
-              <div>
-                <h2 className="text-2xl font-bold text-[#F8E5EE]">{profile.name}</h2>
-                <p className="mt-1 font-medium text-[#F8E5EE]/70">{profile.course}</p>
+              <div className="min-w-0">
+                <h2 className="truncate text-xl font-bold text-[#F8E5EE] sm:text-2xl">{profile.name}</h2>
+                <p className="mt-1 truncate font-medium text-[#F8E5EE]/70">{profile.course}</p>
               </div>
             </div>
 
             {!isEditing && (
-              <button type="button" onClick={() => { setDraft(profile); setIsEditing(true) }} className="inline-flex items-center justify-center gap-2 rounded-full border border-[#9F2042] px-5 py-2.5 font-bold text-[#F8E5EE] transition-colors hover:bg-[#7B0D1E] cursor-pointer">
+              <button type="button" onClick={() => { setDraft(profile); setIsEditing(true) }} className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#9F2042] px-5 py-2.5 font-bold text-[#F8E5EE] transition-colors hover:bg-[#7B0D1E] cursor-pointer sm:w-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-4 w-4 fill-none stroke-current" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 20h9" /><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z" /></svg>
                 Edit Profile
               </button>

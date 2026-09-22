@@ -34,8 +34,8 @@ const Hero = ({ setSearch }) => {
   }, [input])
 
   return (
-    <div className='px-5 pb-12 pt-28 text-center'>
-      <div className='mx-auto max-w-4xl rounded-[32px] border border-[#F8E5EE]/10 bg-[#211103]/80 px-6 py-9 shadow-2xl backdrop-blur-xl sm:px-10 sm:py-10'>
+    <div className='px-4 pb-10 pt-24 text-center sm:px-6 sm:pb-12 sm:pt-28'>
+      <div className='mx-auto w-full max-w-5xl rounded-[32px] border border-[#F8E5EE]/10 bg-[#211103]/80 px-4 py-8 shadow-2xl backdrop-blur-xl sm:px-8 sm:py-10 lg:px-10'>
 
         <h1 className='font-serif text-4xl font-extrabold tracking-tight text-[#F8E5EE] drop-shadow-sm sm:text-5xl lg:text-6xl'>
           Find Your Favorite Music
@@ -69,12 +69,12 @@ const Hero = ({ setSearch }) => {
                     handleSearch()
                   }
                 }}
-                className='flex-1 bg-transparent px-4 py-3 outline-none text-[#F8E5EE] placeholder:text-[#F8E5EE]/40'
+                className='min-w-0 flex-1 bg-transparent px-2 py-3 text-sm outline-none text-[#F8E5EE] placeholder:text-[#F8E5EE]/40 sm:px-4 sm:text-base'
               />
 
               <button
                 onClick={() => handleSearch(input)}
-                className='rounded-full bg-[#9F2042] px-7 py-3 text-[#F8E5EE] font-bold transition-colors duration-200 cursor-pointer shadow-sm hover:bg-[#7B0D1E]'
+                className='shrink-0 rounded-full bg-[#9F2042] px-4 py-3 text-sm font-bold text-[#F8E5EE] transition-colors duration-200 cursor-pointer shadow-sm hover:bg-[#7B0D1E] sm:px-7 sm:text-base'
               >
                 Search
               </button>

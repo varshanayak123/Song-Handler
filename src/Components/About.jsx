@@ -2,23 +2,23 @@ import React from 'react'
 
 const About = ({ onExploreMusic }) => {
   return (
-    <div className='pt-28 px-8 py-12 min-h-[85vh] max-w-6xl mx-auto'>
+    <div className='mx-auto min-h-[85vh] max-w-6xl px-4 py-8 pt-24 sm:px-6 sm:py-10 sm:pt-28 lg:px-8 lg:py-12'>
       
       {/* Header Section */}
-      <div className='text-center mb-16'>
-        <h1 className='text-5xl font-extrabold text-[#F8E5EE] mb-4 tracking-tight'>
+      <div className='mb-10 text-center sm:mb-16'>
+        <h1 className='mb-4 text-3xl font-extrabold tracking-tight text-[#F8E5EE] sm:text-5xl'>
           About Song-Handler
         </h1>
-        <p className='text-[#F8E5EE]/75 text-lg max-w-2xl mx-auto font-medium'>
+        <p className='mx-auto max-w-2xl text-base font-medium text-[#F8E5EE]/75 sm:text-lg'>
           Song-Handler is your all-in-one music discovery hub designed to help you effortlessly search, explore, and bookmark your favorite artists, albums, and tracks.
         </p>
       </div>
 
       {/* Feature Cards Grid */}
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mb-16'>
+      <div className='mb-10 grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 md:gap-8 sm:mb-16'>
 
         {/* Discover Music */}
-        <div className='bg-[#3D1308] border border-[#7B0D1E]/50 rounded-2xl p-8 hover:border-[#9F2042] transition-all duration-300 shadow-md'>
+        <div className='rounded-2xl border border-[#7B0D1E]/50 bg-[#3D1308] p-5 shadow-md transition-all duration-300 hover:border-[#9F2042] sm:p-8'>
           <div className='mb-4 flex h-9 items-center'>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-8 w-8 fill-none stroke-[#9F2042]" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M9 18V5l11-2v13" />
@@ -35,7 +35,7 @@ const About = ({ onExploreMusic }) => {
         </div>
 
         {/* Search Albums */}
-        <div className='bg-[#3D1308] border border-[#7B0D1E]/50 rounded-2xl p-8 hover:border-[#9F2042] transition-all duration-300 shadow-md'>
+        <div className='rounded-2xl border border-[#7B0D1E]/50 bg-[#3D1308] p-5 shadow-md transition-all duration-300 hover:border-[#9F2042] sm:p-8'>
           <div className='mb-4 flex h-9 items-center'>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-8 w-8 fill-none stroke-[#9F2042]" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <circle cx="11" cy="11" r="6.5" />
@@ -51,7 +51,7 @@ const About = ({ onExploreMusic }) => {
         </div>
 
         {/* Save Favorites */}
-        <div className='bg-[#3D1308] border border-[#7B0D1E]/50 rounded-2xl p-8 hover:border-[#9F2042] transition-all duration-300 shadow-md'>
+        <div className='rounded-2xl border border-[#7B0D1E]/50 bg-[#3D1308] p-5 shadow-md transition-all duration-300 hover:border-[#9F2042] sm:p-8'>
           <div className='text-4xl mb-4'>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +73,7 @@ const About = ({ onExploreMusic }) => {
         </div>
 
         {/* Explore & Enjoy */}
-        <div className='bg-[#3D1308] border border-[#7B0D1E]/50 rounded-2xl p-8 hover:border-[#9F2042] transition-all duration-300 shadow-md'>
+        <div className='rounded-2xl border border-[#7B0D1E]/50 bg-[#3D1308] p-5 shadow-md transition-all duration-300 hover:border-[#9F2042] sm:p-8'>
           <div className='mb-4 flex h-9 items-center'>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-8 w-8 fill-none stroke-[#9F2042]" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <circle cx="12" cy="12" r="8.5" />
@@ -95,7 +95,7 @@ const About = ({ onExploreMusic }) => {
       <div className='text-center py-8'>
         <button
           onClick={onExploreMusic}
-          className='px-9 py-4 bg-[#9F2042] text-[#F8E5EE] font-bold rounded-full hover:bg-[#7B0D1E] transition-colors duration-200 shadow-xl cursor-pointer text-lg'
+          className='w-full rounded-full bg-[#9F2042] px-9 py-4 text-lg font-bold text-[#F8E5EE] shadow-xl transition-colors duration-200 cursor-pointer hover:bg-[#7B0D1E] sm:w-auto'
         >
           Explore Music Now
         </button>
