@@ -5,8 +5,17 @@ const Navbar = ({ currentView = 'home', setCurrentView }) => {
         className='flex items-center gap-3 cursor-pointer'
         onClick={() => setCurrentView && setCurrentView('home')}
       >
-        <img className='h-12 w-12 rounded-full object-cover border border-[#7B0D1E]/60' src="/src/Images/Music-Logo.jpg" alt="" />
-        <span className='font-bold text-[#F8E5EE] text-lg tracking-wide'>Mae</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 48 48"
+          className="h-12 w-12 shrink-0"
+          aria-hidden="true"
+        >
+          <circle cx="24" cy="24" r="21" fill="#211103" stroke="#7B0D1E" strokeWidth="1.5" />
+          <path d="M30.5 10.5v18.25a6.25 6.25 0 1 1-3-5.33V15l-10 2.6v15.15a6.25 6.25 0 1 1-3-5.33V15.25Z" fill="#9F2042" />
+          <path d="M19 12.5c1.45-1.45 3.1-2.18 5-2.18 4.1 0 7.43 3.25 7.43 7.27 0 1.67-.7 3.33-2.1 4.96" fill="none" stroke="#F8E5EE" strokeLinecap="round" strokeWidth="1.25" opacity=".85" />
+        </svg>
+        <span className='font-serif font-bold text-[#F8E5EE] text-xl tracking-[0.18em]'>MAE</span>
       </div>
         <div className='flex gap-8 items-center'>
             <button 

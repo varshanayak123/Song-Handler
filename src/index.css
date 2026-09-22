@@ -5,6 +5,19 @@ html {
   background-color: #211103;
 }
 
+body {
+  margin: 0;
+  background-color: #211103;
+}
+
+.app-shell {
+  background:
+    radial-gradient(58rem 34rem at -10% 18%, rgb(123 13 30 / 28%), transparent 64%),
+    radial-gradient(50rem 30rem at 107% 8%, rgb(159 32 66 / 18%), transparent 62%),
+    radial-gradient(44rem 34rem at 82% 100%, rgb(61 19 8 / 70%), transparent 68%),
+    #211103;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }

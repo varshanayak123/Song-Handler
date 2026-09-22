@@ -113,7 +113,7 @@ useEffect(() => {
 }, [favorites])
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#211103] via-[#211103] to-[#3D1308] text-[#F8E5EE]">
+    <div className="app-shell min-h-screen text-[#F8E5EE]">
 
       <Navbar currentView={currentView} setCurrentView={setCurrentView} />
 

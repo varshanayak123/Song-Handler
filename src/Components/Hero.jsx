@@ -36,7 +36,7 @@ const Hero = ({ setSearch }) => {
   return (
     <div className='pt-24 py-20 px-5 text-center'>
 
-      <h1 className='text-5xl font-extrabold text-[#F8E5EE] tracking-tight'>
+      <h1 className='font-serif text-5xl font-extrabold text-[#F8E5EE] tracking-tight drop-shadow-sm'>
         Find Your Favorite Music
       </h1>
 
@@ -49,7 +49,14 @@ const Hero = ({ setSearch }) => {
         <div className='relative w-full max-w-xl'>
 
           {/* Search Bar */}
-          <div className='flex w-full bg-[#3D1308] rounded-full shadow-lg overflow-hidden border border-[#7B0D1E] focus-within:border-[#9F2042] focus-within:ring-2 focus-within:ring-[#9F2042]/30 transition-all duration-200'>
+          <div className='flex w-full bg-[#3D1308]/90 rounded-full shadow-lg overflow-hidden border border-[#7B0D1E]/75 focus-within:border-[#9F2042] focus-within:ring-2 focus-within:ring-[#9F2042]/30 transition-all duration-200'>
+
+            <span className='flex items-center pl-5 text-[#F8E5EE]/75' aria-hidden='true'>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5 fill-none stroke-current" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="6.5" />
+                <path d="m16 16 4 4" />
+              </svg>
+            </span>
 
             <input
               type='text'
@@ -61,7 +68,7 @@ const Hero = ({ setSearch }) => {
                   handleSearch()
                 }
               }}
-              className='flex-1 px-6 py-4 outline-none text-[#F8E5EE] placeholder:text-[#F8E5EE]/40 bg-transparent'
+              className='flex-1 px-4 py-4 outline-none text-[#F8E5EE] placeholder:text-[#F8E5EE]/40 bg-transparent'
             />
 
             <button
