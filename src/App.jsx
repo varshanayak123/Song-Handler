@@ -9,70 +9,107 @@ import { searchAlbums } from './Services/itunesApi'
 
 const App = () => {
 
-const [currentView, setCurrentView] = useState('home')
-const [search, setSearch] = useState('')
-const [apiAlbums, setApiAlbums] = useState([])
-const [trendingAlbums, setTrendingAlbums] = useState([])
-const [specialAlbums, setSpecialAlbums] = useState([])
+  const [currentView, setCurrentView] = useState('home')
+  const [search, setSearch] = useState('')
+  const [apiAlbums, setApiAlbums] = useState([])
+  const [trendingAlbums, setTrendingAlbums] = useState([])
+  const [specialAlbums, setSpecialAlbums] = useState([])
 
-const [favorites, setFavorites] = useState(() => {
-  const saved = localStorage.getItem('favorites')
-  return saved ? JSON.parse(saved) : []
-})
+  const [favorites, setFavorites] = useState(() => {
+    const saved = localStorage.getItem('favorites')
+    return saved ? JSON.parse(saved) : []
+  })
 
-useEffect(() => {
 
-  const loadSpecialAlbums = async () => {
+  // Today's Special
+  useEffect(() => {
 
-    const artists = [
-      'Jungkook',
-      'Billie Eilish',
-      'Sabrina Carpenter',
-      'Ed Sheeran'
-    ]
+    const loadSpecialAlbums = async () => {
 
-    const allAlbums = []
+      const artists = [
+        'Jungkook',
+        'Billie Eilish',
+        'Sabrina Carpenter',
+        'Ed Sheeran',
+        'Ariana Grande',
+        'Dua Lipa',
+        'Taylor Swift',
+        'The Weeknd'
+      ]
 
-    for (const artist of artists) {
-      const results = await searchAlbums(artist)
+      const shuffledArtists = [...artists].sort(
+        () => Math.random() - 0.5
+      )
 
-      allAlbums.push(...results.slice(0, 2))
+      const selectedArtists = shuffledArtists.slice(0, 4)
+
+      const allAlbums = []
+
+      for (const artist of selectedArtists) {
+
+        const results = await searchAlbums(artist)
+
+        const shuffledAlbums = [...results].sort(
+          () => Math.random() - 0.5
+        )
+
+        allAlbums.push(...shuffledAlbums.slice(0, 2))
+      }
+
+      setSpecialAlbums(allAlbums)
     }
 
-    setSpecialAlbums(allAlbums)
-  }
+    loadSpecialAlbums()
 
-  loadSpecialAlbums()
+  }, [])
 
-}, [])
 
-useEffect(() => {
+  // Trending
+  useEffect(() => {
 
-  const loadTrendingAlbums = async () => {
+    const loadTrendingAlbums = async () => {
 
-    const artists = [
-      'Taylor Swift',
-      'The Weeknd',
-      'Ariana Grande',
-      'Dua Lipa'
-    ]
+      const artists = [
+        'Taylor Swift',
+        'The Weeknd',
+        'Ariana Grande',
+        'Dua Lipa',
+        'Jungkook',
+        'Billie Eilish',
+        'Sabrina Carpenter',
+        'Ed Sheeran'
+      ]
 
-    const allAlbums = []
+      const shuffledArtists = [...artists].sort(
+        () => Math.random() - 0.5
+      )
 
-    for (const artist of artists) {
-      const results = await searchAlbums(artist)
+      const selectedArtists = shuffledArtists.slice(0, 4)
 
-      allAlbums.push(...results.slice(0, 3))
+      const allAlbums = []
+
+      for (const artist of selectedArtists) {
+
+        const results = await searchAlbums(artist)
+
+        const shuffledAlbums = [...results].sort(
+          () => Math.random() - 0.5
+        )
+
+        allAlbums.push(...shuffledAlbums.slice(0, 3))
+      }
+
+      setTrendingAlbums(allAlbums)
     }
 
-    setTrendingAlbums(allAlbums)
-  }
+    loadTrendingAlbums()
 
-  loadTrendingAlbums()
+  }, [])
 
-}, [])
 
+  // Search
   const handleSearch = async (artist) => {
+
     if (typeof artist !== 'string') return
 
     setSearch(artist)
@@ -83,80 +120,140 @@ useEffect(() => {
     }
 
     try {
+
       const results = await searchAlbums(artist)
+
       setApiAlbums(results || [])
+
     } catch (error) {
+
       console.error('Error fetching albums:', error)
       setApiAlbums([])
+
     }
   }
 
-  const toggleFavorite = (album) => {
-  setFavorites((prev) => {
 
-    const exists = prev.some(
-      (fav) => fav.id === album.id
+  // Favorites
+  const toggleFavorite = (album) => {
+
+    setFavorites((prev) => {
+
+      const exists = prev.some(
+        (fav) => fav.id === album.id
+      )
+
+      if (exists) {
+
+        return prev.filter(
+          (fav) => fav.id !== album.id
+        )
+
+      }
+
+      return [...prev, album]
+
+    })
+  }
+
+
+  // Save favorites to localStorage
+  useEffect(() => {
+
+    localStorage.setItem(
+      'favorites',
+      JSON.stringify(favorites)
     )
 
-    if (exists) {
-      return prev.filter(
-        (fav) => fav.id !== album.id
-      )
-    }
+  }, [favorites])
 
-    return [...prev, album]
-  })
-}
-
-useEffect(() => {
-  localStorage.setItem('favorites', JSON.stringify(favorites))
-}, [favorites])
 
   return (
+
     <div className="app-shell min-h-screen text-[#F8E5EE]">
 
-      <Navbar currentView={currentView} setCurrentView={setCurrentView} />
+      <Navbar
+        currentView={currentView}
+        setCurrentView={setCurrentView}
+      />
+
+
+      {/* HOME */}
 
       {currentView === 'home' && (
+
         <>
+
           <Hero setSearch={handleSearch} />
 
-          <AlbumGrid 
-            search={search} 
-            apiAlbums={apiAlbums} 
-            specialAlbums={specialAlbums} 
+          <AlbumGrid
+            search={search}
+            apiAlbums={apiAlbums}
+            specialAlbums={specialAlbums}
             trendingAlbums={trendingAlbums}
             favorites={favorites}
             toggleFavorite={toggleFavorite}
           />
+
         </>
+
       )}
 
+
+      {/* FAVORITES */}
+
       {currentView === 'favorites' && (
-        <Favorites 
+
+        <Favorites
           favorites={favorites}
           toggleFavorite={toggleFavorite}
           onExploreMusic={() => {
+
             setCurrentView('home')
-            window.scrollTo({ top: 0, behavior: 'smooth' })
+
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            })
+
           }}
         />
+
       )}
+
+
+      {/* ABOUT */}
 
       {currentView === 'about' && (
-        <About 
+
+        <About
           onExploreMusic={() => {
+
             setCurrentView('home')
-            window.scrollTo({ top: 0, behavior: 'smooth' })
+
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            })
+
           }}
         />
+
       )}
 
+
+      {/* PROFILE */}
+
       {currentView === 'profile' && (
-        <Profile favorites={favorites} />
+
+        <Profile
+          favorites={favorites}
+        />
+
       )}
 
     </div>
+
   )
 }
 

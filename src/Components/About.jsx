@@ -19,7 +19,13 @@ const About = ({ onExploreMusic }) => {
 
         {/* Discover Music */}
         <div className='bg-[#3D1308] border border-[#7B0D1E]/50 rounded-2xl p-8 hover:border-[#9F2042] transition-all duration-300 shadow-md'>
-          <div className='text-4xl mb-4'>✨</div>
+          <div className='mb-4 flex h-9 items-center'>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-8 w-8 fill-none stroke-[#9F2042]" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M9 18V5l11-2v13" />
+              <circle cx="6" cy="18" r="3" />
+              <circle cx="17" cy="16" r="3" />
+            </svg>
+          </div>
           <h2 className='text-2xl font-bold text-[#F8E5EE] mb-3'>
             Discover Music
           </h2>
@@ -30,7 +36,12 @@ const About = ({ onExploreMusic }) => {
 
         {/* Search Albums */}
         <div className='bg-[#3D1308] border border-[#7B0D1E]/50 rounded-2xl p-8 hover:border-[#9F2042] transition-all duration-300 shadow-md'>
-          <div className='text-4xl mb-4'>🔍</div>
+          <div className='mb-4 flex h-9 items-center'>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-8 w-8 fill-none stroke-[#9F2042]" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="6.5" />
+              <path d="m16 16 4 4" />
+            </svg>
+          </div>
           <h2 className='text-2xl font-bold text-[#F8E5EE] mb-3'>
             Search Albums
           </h2>
@@ -63,7 +74,13 @@ const About = ({ onExploreMusic }) => {
 
         {/* Explore & Enjoy */}
         <div className='bg-[#3D1308] border border-[#7B0D1E]/50 rounded-2xl p-8 hover:border-[#9F2042] transition-all duration-300 shadow-md'>
-          <div className='text-4xl mb-4'>🎧</div>
+          <div className='mb-4 flex h-9 items-center'>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-8 w-8 fill-none stroke-[#9F2042]" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="8.5" />
+              <circle cx="12" cy="12" r="2.25" />
+              <path d="M12 3.5v3M20.5 12h-3M12 20.5v-3M3.5 12h3" />
+            </svg>
+          </div>
           <h2 className='text-2xl font-bold text-[#F8E5EE] mb-3'>
             Explore & Enjoy
           </h2>
@@ -89,4 +106,3 @@ const About = ({ onExploreMusic }) => {
 }
 
 export default About
-
