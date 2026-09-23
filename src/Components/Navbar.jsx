@@ -63,7 +63,11 @@ const Navbar = ({ currentView = 'home', setCurrentView }) => {
         <div className='flex items-center justify-self-end gap-2 sm:gap-3'>
           <button
             type="button"
-            className='hidden rounded-full bg-[#9F2042] px-5 py-2 text-sm font-bold text-[#F8E5EE] shadow-sm transition-colors duration-200 hover:bg-[#7B0D1E] cursor-pointer sm:inline-flex'
+            onClick={() => {
+                 if (setCurrentView) setCurrentView('auth')
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          className='hidden rounded-full bg-[#9F2042] px-5 py-2 text-sm font-bold text-[#F8E5EE] shadow-sm transition-colors duration-200 hover:bg-[#7B0D1E] cursor-pointer sm:inline-flex'
           >
             Sign In
           </button>

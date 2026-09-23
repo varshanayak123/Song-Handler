@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { supabase } from './lib/supabaseClient'
 import Navbar from './Components/Navbar'
 import Hero from './Components/Hero'
 import AlbumGrid from './Components/AlbumGrid'
@@ -6,9 +7,11 @@ import Favorites from './Components/Favorites'
 import About from './Components/About'
 import Profile from './Components/Profile'
 import { searchAlbums } from './Services/itunesApi'
+import Auth from './Components/Auth'
 
 const App = () => {
 
+  const [user, setUser] = useState(null)
   const [currentView, setCurrentView] = useState('home')
   const [search, setSearch] = useState('')
   const [apiAlbums, setApiAlbums] = useState([])
@@ -20,6 +23,25 @@ const App = () => {
     return saved ? JSON.parse(saved) : []
   })
 
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user)
+  })
+
+    const {
+    data: { subscription },
+} = supabase.auth.onAuthStateChange((event, session) => {
+     setUser(session?.user ?? null)
+
+  if (event === 'SIGNED_IN') {
+    setCurrentView('home')
+  }
+})
+
+  return () => {
+      subscription.unsubscribe()
+  }
+  }, [])
 
   // Today's Special
   useEffect(() => {
@@ -250,6 +272,10 @@ const App = () => {
           favorites={favorites}
         />
 
+      )}
+
+      {currentView === 'auth' && (
+         <Auth />
       )}
 
     </div>
