@@ -38,13 +38,13 @@ const Favorites = ({ favorites = [], toggleFavorite, onExploreMusic }) => {
         <>
 
           {/* Favorite Albums */}
-          <div className='flex flex-wrap gap-4 sm:gap-6 lg:gap-10'>
+          <div className='flex flex-wrap gap-3 sm:gap-4 lg:gap-5'>
 
             {favorites.map((album, index) => (
 
               <div
                 key={`${album.id || album.name}-${index}`}
-                className='w-[200px] min-w-[200px]'
+                className='w-[150px] min-w-[150px]'
               >
 
                 <AlbumCard
