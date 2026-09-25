@@ -197,6 +197,7 @@ const App = () => {
       <Navbar
         currentView={currentView}
         setCurrentView={setCurrentView}
+        user={user}
       />
 
 
