@@ -1,24 +1,32 @@
 import { createFileRoute } from "@tanstack/react-router";
+// @ts-expect-error JSX module without type declarations
+import SongHandlerApp from "@/components/song-handler/App.jsx";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  // The Song-Handler app is a client-side SPA that reads localStorage/window
+  // during render, so it renders on the client only.
+  ssr: false,
+  head: () => ({
+    meta: [
+      { title: "Song-Handler — Discover & Save Your Favorite Albums" },
+      {
+        name: "description",
+        content:
+          "Song-Handler by MAE: search millions of albums, explore today's specials and trending music, and save your favorites.",
+      },
+      { property: "og:title", content: "Song-Handler — Discover & Save Your Favorite Albums" },
+      {
+        property: "og:description",
+        content:
+          "Search millions of albums, explore today's specials and trending music, and save your favorites.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+  return <SongHandlerApp />;
 }
