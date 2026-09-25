@@ -1,0 +1,11 @@
+{
+  "source": "github:varshanayak123/song-handler (published at song-handler.vercel.app)",
+  "capabilities": [
+    { "capability": "SPA UI (home, search, iTunes API, specials, trending, favorites, about, profile)", "source": "src/Components", "outcome": "ported verbatim to src/components/song-handler, rendered at /", "status": "verified", "next_action": null },
+    { "capability": "auth (email/password via user's own Supabase project)", "source": "Auth.jsx + supabaseClient.js", "outcome": "preserved; same Supabase project (sxbffejgjbmumzydpozl) with its publishable key, so existing users keep working", "status": "migrated", "next_action": "user must add Lovable preview/publish origins to Supabase Auth redirect URLs" },
+    { "capability": "Google + GitHub OAuth sign-in", "source": "user request", "outcome": "buttons added to existing Auth page via supabase.auth.signInWithOAuth", "status": "implemented", "next_action": "user must enable Google and GitHub providers in their Supabase dashboard (Authentication → Providers) with client ID/secret" },
+    { "capability": "profile course field removal", "source": "user request", "outcome": "Course/BSc Computer Science removed from Profile", "status": "verified", "next_action": null },
+    { "capability": "navbar logged-in state", "source": "user request", "outcome": "user prop now passed to Navbar so Sign In/Log Out/profile icon react to auth state", "status": "verified", "next_action": null },
+    { "capability": "database records", "source": "none detected", "outcome": "app uses no database tables; favorites/profile are localStorage", "status": "not_applicable", "next_action": null }
+  ]
+}
