@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { supabase } from '../lib/supabaseClient'
+import { supabase } from '../../lib/song-handler/supabaseClient'
 
 const Navbar = ({ currentView = 'home', setCurrentView, user }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
