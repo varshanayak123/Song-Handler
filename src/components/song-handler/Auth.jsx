@@ -44,6 +44,23 @@ const Auth = () => {
     setLoading(false)
   }
 
+  const handleOAuthSignIn = async (provider) => {
+    setLoading(true)
+    setMessage('')
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: window.location.origin,
+      },
+    })
+
+    if (error) {
+      setMessage(error.message)
+      setLoading(false)
+    }
+  }
+
   return (
     <div className='min-h-screen flex items-center justify-center px-4 pt-24 pb-10'>
       <div className='w-full max-w-md rounded-3xl border border-[#7B0D1E]/50 bg-[#3D1308] p-6 shadow-2xl sm:p-8'>
