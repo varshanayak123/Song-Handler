@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 
 const defaultProfile = {
   name: 'Varsha',
-  course: 'BSc Computer Science',
   bio: 'Music lover & album explorer'
 }
 
@@ -26,7 +25,6 @@ const Profile = ({ favorites = [] }) => {
     event.preventDefault()
     setProfile({
       name: draft.name.trim() || defaultProfile.name,
-      course: draft.course.trim() || defaultProfile.course,
       bio: draft.bio.trim() || defaultProfile.bio
     })
     setIsEditing(false)
@@ -58,7 +56,6 @@ const Profile = ({ favorites = [] }) => {
               </div>
               <div className="min-w-0">
                 <h2 className="truncate text-xl font-bold text-[#F8E5EE] sm:text-2xl">{profile.name}</h2>
-                <p className="mt-1 truncate font-medium text-[#F8E5EE]/70">{profile.course}</p>
               </div>
             </div>
 
@@ -85,7 +82,6 @@ const Profile = ({ favorites = [] }) => {
           ) : (
             <form onSubmit={handleSave} className="mt-8 space-y-5">
               <label className="block text-sm font-bold text-[#F8E5EE]"><span className="mb-2 block">Name</span><input className={inputClassName} value={draft.name} onChange={(event) => setDraft({ ...draft, name: event.target.value })} /></label>
-              <label className="block text-sm font-bold text-[#F8E5EE]"><span className="mb-2 block">Course</span><input className={inputClassName} value={draft.course} onChange={(event) => setDraft({ ...draft, course: event.target.value })} /></label>
               <label className="block text-sm font-bold text-[#F8E5EE]"><span className="mb-2 block">Bio</span><textarea className={`${inputClassName} min-h-28 resize-y`} value={draft.bio} onChange={(event) => setDraft({ ...draft, bio: event.target.value })} /></label>
               <div className="flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:justify-end">
                 <button type="button" onClick={handleCancel} className="rounded-full border border-[#7B0D1E] px-6 py-3 font-bold text-[#F8E5EE] transition-colors hover:bg-[#211103] cursor-pointer">Cancel</button>
