@@ -24,24 +24,36 @@ const App = () => {
   })
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => {
-      setUser(data.user)
+  const getInitialSession = async () => {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession()
+
+    setUser(session?.user ?? null)
+  }
+
+  getInitialSession()
+
+  const {
+    data: { subscription },
+  } = supabase.auth.onAuthStateChange((event, session) => {
+    console.log('Auth event:', event)
+
+    setUser(session?.user ?? null)
+
+    if (event === 'SIGNED_IN') {
+      setCurrentView('home')
+    }
+
+    if (event === 'SIGNED_OUT') {
+      setCurrentView('home')
+    }
   })
 
-    const {
-    data: { subscription },
-} = supabase.auth.onAuthStateChange((event, session) => {
-     setUser(session?.user ?? null)
-
-  if (event === 'SIGNED_IN') {
-    setCurrentView('home')
-  }
-})
-
   return () => {
-      subscription.unsubscribe()
+    subscription.unsubscribe()
   }
-  }, [])
+}, [])
 
   // Today's Special
   useEffect(() => {
@@ -195,8 +207,9 @@ const App = () => {
     <div className="app-shell min-h-screen overflow-x-clip text-[#F8E5EE]">
 
       <Navbar
-        currentView={currentView}
-        setCurrentView={setCurrentView}
+      currentView={currentView}
+      setCurrentView={setCurrentView}
+      user={user}
       />
 
 
