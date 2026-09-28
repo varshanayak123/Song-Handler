@@ -171,32 +171,6 @@ const Navbar = ({ currentView = 'home', setCurrentView, user }) => {
           </button>
         )}
 
-        {!user && (
-          <button
-            type="button"
-            onClick={handleProfile}
-            className={`h-9 w-9 rounded-full bg-[#3D1308] border shadow-inner flex items-center justify-center transition-colors duration-200 cursor-pointer hover:border-[#9F2042] focus:outline-none focus:ring-2 focus:ring-[#9F2042]/70 ${
-              currentView === 'profile'
-                ? 'border-[#9F2042]'
-                : 'border-[#7B0D1E]/80'
-            }`}
-            aria-label="Open profile"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              className="w-5 h-5 fill-none stroke-[#F8E5EE]"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="8" r="3.25" />
-              <path d="M5.5 20c.65-3.3 3.1-5.25 6.5-5.25s5.85 1.95 6.5 5.25" />
-            </svg>
-          </button>
-        )}
-
         {user && (
           <button
             type="button"
