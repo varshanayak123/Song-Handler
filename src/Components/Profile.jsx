@@ -2,54 +2,99 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
 
 const defaultProfile = {
-  name: 'Varsha',
+  name: '',
   bio: 'Music lover & album explorer',
-  vibe: 'Discovering new sounds, one album at a time'
+  vibe: 'Discovering new sounds, one album at a time',
 }
 
 const Profile = ({ favorites = [] }) => {
-  const [profile, setProfile] = useState(() => {
-    try {
-      const savedProfile = localStorage.getItem('profile')
-      return savedProfile
-        ? { ...defaultProfile, ...JSON.parse(savedProfile) }
-        : defaultProfile
-    } catch {
-      return defaultProfile
-    }
-  })
-
-  const [draft, setDraft] = useState(profile)
+  const [profile, setProfile] = useState(defaultProfile)
+  const [draft, setDraft] = useState(defaultProfile)
   const [isEditing, setIsEditing] = useState(false)
   const [userEmail, setUserEmail] = useState('')
 
-  useEffect(() => {
-    localStorage.setItem('profile', JSON.stringify(profile))
-  }, [profile])
+  const [userId, setUserId] = useState(null)
 
+  // Get logged-in user
   useEffect(() => {
     const getUser = async () => {
       const {
-        data: { user }
+        data: { user },
       } = await supabase.auth.getUser()
 
-      if (user?.email) {
-        setUserEmail(user.email)
+      if (!user) return
+
+      setUserId(user.id)
+      setUserEmail(user.email || '')
+
+      // Get name from Supabase user metadata
+      const metadataName =
+        user.user_metadata?.full_name ||
+        user.user_metadata?.name ||
+        user.user_metadata?.user_name ||
+        user.email?.split('@')[0] ||
+        'Music Lover'
+
+      // Each user's profile gets its own localStorage key
+      const profileKey = `profile_${user.id}`
+      const savedProfile = localStorage.getItem(profileKey)
+
+      if (savedProfile) {
+        try {
+          const parsedProfile = JSON.parse(savedProfile)
+
+          const userProfile = {
+            ...defaultProfile,
+            ...parsedProfile,
+            name: parsedProfile.name || metadataName,
+          }
+
+          setProfile(userProfile)
+          setDraft(userProfile)
+        } catch {
+          const userProfile = {
+            ...defaultProfile,
+            name: metadataName,
+          }
+
+          setProfile(userProfile)
+          setDraft(userProfile)
+        }
+      } else {
+        const userProfile = {
+          ...defaultProfile,
+          name: metadataName,
+        }
+
+        setProfile(userProfile)
+        setDraft(userProfile)
       }
     }
 
     getUser()
   }, [])
 
+  // Save profile separately for each user
+  useEffect(() => {
+    if (!userId) return
+
+    localStorage.setItem(
+      `profile_${userId}`,
+      JSON.stringify(profile)
+    )
+  }, [profile, userId])
+
   const handleSave = (event) => {
     event.preventDefault()
 
-    setProfile({
-      name: draft.name.trim() || defaultProfile.name,
+    const updatedProfile = {
+      name: draft.name.trim() || profile.name || 'Music Lover',
       bio: draft.bio.trim() || defaultProfile.bio,
-      vibe: draft.vibe.trim() || defaultProfile.vibe
-    })
+      vibe: draft.vibe.trim() || defaultProfile.vibe,
+    }
 
+    setProfile(updatedProfile)
+    setDraft(updatedProfile)
     setIsEditing(false)
   }
 
@@ -105,7 +150,7 @@ const Profile = ({ favorites = [] }) => {
 
               <div className="min-w-0">
                 <h2 className="truncate text-xl font-bold text-[#F8E5EE] sm:text-2xl">
-                  {profile.name}
+                  {profile.name || 'Music Lover'}
                 </h2>
 
                 <p className="mt-1 truncate font-medium text-[#F8E5EE]/70">
@@ -264,7 +309,7 @@ const Profile = ({ favorites = [] }) => {
                   onChange={(event) =>
                     setDraft({
                       ...draft,
-                      name: event.target.value
+                      name: event.target.value,
                     })
                   }
                 />
@@ -280,7 +325,7 @@ const Profile = ({ favorites = [] }) => {
                   onChange={(event) =>
                     setDraft({
                       ...draft,
-                      vibe: event.target.value
+                      vibe: event.target.value,
                     })
                   }
                 />
@@ -296,7 +341,7 @@ const Profile = ({ favorites = [] }) => {
                   onChange={(event) =>
                     setDraft({
                       ...draft,
-                      bio: event.target.value
+                      bio: event.target.value,
                     })
                   }
                 />
@@ -323,6 +368,7 @@ const Profile = ({ favorites = [] }) => {
               </div>
             </form>
           )}
+
         </div>
       </section>
     </main>
