@@ -27,19 +27,20 @@ A responsive music discovery web application built with React and Vite. Song Han
 ### 🏠 Home Page
 
 <img width="1920" height="910" alt="Screenshot 2026-09-29 221129" src="https://github.com/user-attachments/assets/8784d4b7-91bb-4dfe-b489-87e80d9d7279" />
+<img width="1920" height="904" alt="Screenshot 2026-09-29 221146" src="https://github.com/user-attachments/assets/765c510c-cce0-46d5-a968-e6f8a17addc1" />
+
+### Search Results
+
+<img width="1920" height="913" alt="Screenshot 2026-09-29 221448" src="https://github.com/user-attachments/assets/556f5d3a-3411-472a-9636-f06adca838e3" />
 
 
-### 🔎 Search Results
+### Favorites
 
-_Add screenshot here_
+<img width="1920" height="919" alt="Screenshot 2026-09-29 221242" src="https://github.com/user-attachments/assets/266bc521-1e8a-4ae3-be6a-e853b017b2b5" />
 
-### ❤️ Favorites
+### Profile
 
-_Add screenshot here_
-
-### 👤 Profile
-
-_Add screenshot here_
+<img width="1920" height="913" alt="Screenshot 2026-09-29 221340" src="https://github.com/user-attachments/assets/b30f8daa-e932-45b2-8dcd-fac560100468" />
 
 ## 🛠️ Tech Stack
 
