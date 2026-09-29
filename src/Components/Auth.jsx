@@ -16,13 +16,15 @@ const Auth = () => {
     setMessage('')
 
     if (isSignUp) {
+      const trimmedName = name.trim()
+
       const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
           emailRedirectTo: window.location.origin,
           data: {
-            full_name: name.trim(),
+            full_name: trimmedName,
           },
         },
       })
@@ -30,6 +32,10 @@ const Auth = () => {
       if (error) {
         setMessage(error.message)
       } else {
+        // Remember the name until the user verifies
+        // their email and logs in for the first time.
+        localStorage.setItem('pendingProfileName', trimmedName)
+
         setMessage(
           'Account created! Check your email to verify your account.'
         )
@@ -179,14 +185,17 @@ const Auth = () => {
                   d='M21.805 12.23c0-.79-.065-1.55-.205-2.28H12v4.315h5.5a4.7 4.7 0 0 1-2.04 3.085v2.565h3.3c1.93-1.775 3.045-4.39 3.045-7.685Z'
                   fill='#4285F4'
                 />
+
                 <path
                   d='M12 22c2.76 0 5.075-.915 6.76-2.485l-3.3-2.565c-.915.615-2.08.98-3.46.98-2.66 0-4.91-1.795-5.715-4.205H2.875v2.65A10.21 10.21 0 0 0 12 22Z'
                   fill='#34A853'
                 />
+
                 <path
                   d='M6.285 13.725A6.14 6.14 0 0 1 5.965 12c0-.6.11-1.185.32-1.725v-2.65H2.875A10.02 10.02 0 0 0 1.8 12c0 1.615.39 3.14 1.075 4.375l3.41-2.65Z'
                   fill='#FBBC05'
                 />
+
                 <path
                   d='M12 6.07c1.5 0 2.845.515 3.905 1.525l2.93-2.93C17.07 3.05 14.76 2 12 2a10.21 10.21 0 0 0-9.125 5.625l3.41 2.65C7.09 7.865 9.34 6.07 12 6.07Z'
                   fill='#EA4335'
@@ -232,6 +241,7 @@ const Auth = () => {
             onClick={() => {
               setIsSignUp(!isSignUp)
               setMessage('')
+              setName('')
             }}
             className='text-sm font-medium text-[#F8E5EE]/70 hover:text-[#9F2042]'
           >

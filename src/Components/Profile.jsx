@@ -28,12 +28,16 @@ const Profile = ({ favorites = [] }) => {
       setUserEmail(user.email || '')
 
       // Get name from Supabase user metadata
-      const metadataName =
-        user.user_metadata?.full_name ||
-        user.user_metadata?.name ||
-        user.user_metadata?.user_name ||
-        user.email?.split('@')[0] ||
-        'Music Lover'
+      const pendingName = localStorage.getItem('pendingProfileName')
+
+       const metadataName =
+       user.user_metadata?.full_name ||
+       user.user_metadata?.name ||
+       user.user_metadata?.user_name ||
+       user.user_metadata?.preferred_username ||
+       pendingName ||
+       user.email?.split('@')[0] ||
+       'Music Lover'
 
       // Each user's profile gets its own localStorage key
       const profileKey = `profile_${user.id}`
@@ -69,6 +73,7 @@ const Profile = ({ favorites = [] }) => {
         setProfile(userProfile)
         setDraft(userProfile)
       }
+      localStorage.removeItem('pendingProfileName')
     }
 
     getUser()
